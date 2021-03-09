@@ -3,14 +3,16 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-  const { time, intemp, temp, feelslike, dew } = req.query;
-  console.log('time: ', time);
+  const {
+    time, intemp, temp, feelslike, dew,
+  } = req.query;
+  console.log('time: ', new Date(parseInt(time, 10)));
   console.log('intemp: ', intemp);
   console.log('temp: ', temp);
   console.log('feelslike: ', feelslike);
   console.log('dewpoint: ', dew);
   res.status(200).json({
-    message: 'OK'
+    message: 'OK',
   });
 });
 
