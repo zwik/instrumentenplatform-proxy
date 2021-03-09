@@ -1,0 +1,31 @@
+{
+  "name": "cumulus-proxy",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "lint": "eslint src"
+  },
+  "keywords": [
+    "cumulus",
+    "mx",
+    "cumuluxmx",
+    "proxy"
+  ],
+  "author": {
+    "name": "Marcel van den Bosch",
+    "email": "m.v.d.bosch@gmail.com"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.2.1",
+    "eslint-plugin-import": "^2.22.1",
+    "nodemon": "^2.0.7"
+  }
+}
