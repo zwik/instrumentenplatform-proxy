@@ -1,7 +1,7 @@
 {
   "name": "cumulus-proxy",
   "version": "1.0.0",
-  "description": "",
+  "description": "Small proxy that interfaces between CumulusMX and instrumentenplatform-server",
   "main": "server.js",
   "scripts": {
     "start": "nodemon src/server.js",
@@ -10,7 +10,7 @@
   "keywords": [
     "cumulus",
     "mx",
-    "cumuluxmx",
+    "cumulusmx",
     "proxy"
   ],
   "author": {
