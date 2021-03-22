@@ -11,7 +11,7 @@ const endpoint = '/graphql';
 
 app.get('/', async (req, res) => {
   const {
-    time, intemp, temp, feelslike, dew, inhum, hum, pressure,
+    time, intemp, inhum, pressure,
   } = req.query;
   // console.log('time: ', new Date(parseInt(time, 10)));
   // console.log('intemp: ', intemp);
