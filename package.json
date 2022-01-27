@@ -21,7 +21,7 @@
   "dependencies": {
     "axios": "^0.25.0",
     "express": "^4.17.2",
-    "graphql": "^16.2.0",
+    "graphql": "^16.3.0",
     "graphql-tag": "^2.12.6"
   },
   "devDependencies": {
