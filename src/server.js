@@ -48,5 +48,5 @@ app.get('/', async (req, res) => {
 });
 
 const server = app.listen(3000, () => {
-  console.log(`Cumulus proxy istening on port: ${server.address().port}`);
+  console.log(`Cumulus proxy is listening on port: ${server.address().port}`);
 });
