@@ -5,7 +5,7 @@ const axios = require('axios');
 
 const app = express();
 
-axios.defaults.baseURL = 'http://localhost:4000';
+axios.defaults.baseURL = 'http://server:4000';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const endpoint = '/graphql';
 
