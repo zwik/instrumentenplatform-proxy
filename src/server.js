@@ -5,13 +5,22 @@ const axios = require('axios');
 
 const app = express();
 
-axios.defaults.baseURL = 'http://server:4000';
+axios.defaults.baseURL = 'http://localhost:4000';
 axios.defaults.headers.post['Content-Type'] = 'application/json';
 const endpoint = '/graphql';
 
 app.get('/', async (req, res) => {
   const {
-    time, temp, intemp, dewpoint, feelslike, hum, inhum, pressure, windspeed, winddirection,
+    time,
+    temperature,
+    insidetemperature,
+    dewpoint,
+    feelslike,
+    humidity,
+    insidehumidity,
+    pressure,
+    windspeed,
+    winddirection,
   } = req.query;
   // console.log('time: ', new Date(parseInt(time, 10)));
   // console.log('intemp: ', intemp);
@@ -22,26 +31,24 @@ app.get('/', async (req, res) => {
   // console.log('hum: ', hum);
   // console.log('pressure: ', pressure);
 
-  const INSERT_INSIDE_VALUES = gql`
-    mutation InsertTemperatureValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float) {
+  const INSERT_VALUES = gql`
+    mutation InsertValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float) {
       insertTemperatureValues(datetime: $datetime, temperature: $temperature, insidetemperature: $insidetemperature, dewpoint: $dewpoint, feelslike: $feelslike)
-    }
-    mutation InsertAirValues($datetime: Date!, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float) {
       insertAirValues(datetime: $datetime, humidity: $humidity, insidehumidity: $insidehumidity, pressure: $pressure, windspeed: $windspeed, winddirection: $winddirection)
     }
   `;
 
   try {
     await axios.post(endpoint, {
-      query: print(INSERT_INSIDE_VALUES),
+      query: print(INSERT_VALUES),
       variables: {
         datetime: parseInt(time, 10),
-        temperature: parseInt(temp.replace(',', '.'), 10),
-        insidetemperature: parseInt(intemp.replace(',', '.'), 10),
+        temperature: parseInt(temperature.replace(',', '.'), 10),
+        insidetemperature: parseInt(insidetemperature.replace(',', '.'), 10),
         dewpoint: parseInt(dewpoint.replace(',', '.'), 10),
         feelslike: parseInt(feelslike.replace(',', '.'), 10),
-        humidity: parseInt(hum.replace(',', '.'), 10),
-        insidehumidity: parseInt(inhum.replace(',', '.'), 10),
+        humidity: parseInt(humidity.replace(',', '.'), 10),
+        insidehumidity: parseInt(insidehumidity.replace(',', '.'), 10),
         pressure: parseInt(pressure.replace(',', '.'), 10),
         windspeed: parseInt(windspeed.replace(',', '.'), 10),
         winddirection: parseInt(winddirection.replace(',', '.'), 10),
