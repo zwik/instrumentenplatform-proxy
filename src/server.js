@@ -11,7 +11,7 @@ const endpoint = '/graphql';
 
 app.get('/', async (req, res) => {
   const {
-    time, intemp, inhum, pressure,
+    time, temp, intemp, dewpoint, feelslike, hum, inhum, pressure, windspeed, winddirection,
   } = req.query;
   // console.log('time: ', new Date(parseInt(time, 10)));
   // console.log('intemp: ', intemp);
@@ -23,8 +23,11 @@ app.get('/', async (req, res) => {
   // console.log('pressure: ', pressure);
 
   const INSERT_INSIDE_VALUES = gql`
-    mutation insertInsideValues($datetime: Date!, $temperature: Float, $humidity: Float, $pressure: Float) {
-      insertInsideValues(datetime: $datetime, temperature: $temperature, humidity: $humidity, pressure: $pressure)
+    mutation InsertTemperatureValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float) {
+      insertTemperatureValues(datetime: $datetime, temperature: $temperature, insidetemperature: $insidetemperature, dewpoint: $dewpoint, feelslike: $feelslike)
+    }
+    mutation InsertAirValues($datetime: Date!, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float) {
+      insertAirValues(datetime: $datetime, humidity: $humidity, insidehumidity: $insidehumidity, pressure: $pressure, windspeed: $windspeed, winddirection: $winddirection)
     }
   `;
 
@@ -33,9 +36,15 @@ app.get('/', async (req, res) => {
       query: print(INSERT_INSIDE_VALUES),
       variables: {
         datetime: parseInt(time, 10),
-        temperature: parseInt(intemp.replace(',', '.'), 10),
-        humidity: parseInt(inhum.replace(',', '.'), 10),
+        temperature: parseInt(temp.replace(',', '.'), 10),
+        insidetemperature: parseInt(intemp.replace(',', '.'), 10),
+        dewpoint: parseInt(dewpoint.replace(',', '.'), 10),
+        feelslike: parseInt(feelslike.replace(',', '.'), 10),
+        humidity: parseInt(hum.replace(',', '.'), 10),
+        insidehumidity: parseInt(inhum.replace(',', '.'), 10),
         pressure: parseInt(pressure.replace(',', '.'), 10),
+        windspeed: parseInt(windspeed.replace(',', '.'), 10),
+        winddirection: parseInt(winddirection.replace(',', '.'), 10),
       },
     });
   } catch (err) {
