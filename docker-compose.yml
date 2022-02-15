@@ -6,6 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     user: node
+    restart: always
     ports: 
       - 3000:3000
     working_dir: /home/node/app
