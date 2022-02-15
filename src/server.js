@@ -21,6 +21,7 @@ app.get('/', async (req, res) => {
     pressure,
     windspeed,
     winddirection,
+    rate,
   } = req.query;
   // console.log('time: ', new Date(parseInt(time, 10)));
   // console.log('intemp: ', intemp);
@@ -32,9 +33,10 @@ app.get('/', async (req, res) => {
   // console.log('pressure: ', pressure);
 
   const INSERT_VALUES = gql`
-    mutation InsertValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float) {
+    mutation InsertValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float, $rate: Float) {
       insertTemperatureValues(datetime: $datetime, temperature: $temperature, insidetemperature: $insidetemperature, dewpoint: $dewpoint, feelslike: $feelslike)
       insertAirValues(datetime: $datetime, humidity: $humidity, insidehumidity: $insidehumidity, pressure: $pressure, windspeed: $windspeed, winddirection: $winddirection)
+      insertRainValues(datetime: $datetime, rate: $rate)
     }
   `;
 
@@ -52,6 +54,7 @@ app.get('/', async (req, res) => {
         pressure: parseInt(pressure.replace(',', '.'), 10),
         windspeed: parseInt(windspeed.replace(',', '.'), 10),
         winddirection: parseInt(winddirection.replace(',', '.'), 10),
+        rate: parseInt(rate.replace(',', '.'), 10),
       },
     });
   } catch (err) {
