@@ -35,7 +35,7 @@ app.get('/', async (req, res) => {
   // console.log('pressure: ', pressure);
 
   const INSERT_VALUES = gql`
-    mutation InsertValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float, $rate: Float) {
+    mutation InsertValues($datetime: Date!, $temperature: Float, $insidetemperature: Float, $dewpoint: Float, $feelslike: Float, $humidity: Float, $insidehumidity: Float, $pressure: Float, $windspeed: Float, $winddirection: Float, $rate: Float, $radiation: Float, $uvindex: Float) {
       insertTemperatureValues(datetime: $datetime, temperature: $temperature, insidetemperature: $insidetemperature, dewpoint: $dewpoint, feelslike: $feelslike)
       insertAirValues(datetime: $datetime, humidity: $humidity, insidehumidity: $insidehumidity, pressure: $pressure, windspeed: $windspeed, winddirection: $winddirection)
       insertRainValues(datetime: $datetime, rate: $rate)
