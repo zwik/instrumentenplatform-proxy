@@ -22,6 +22,8 @@ app.get('/', async (req, res) => {
     windspeed,
     winddirection,
     rate,
+    radiation,
+    uvindex,
   } = req.query;
   // console.log('time: ', new Date(parseInt(time, 10)));
   // console.log('intemp: ', intemp);
@@ -37,6 +39,7 @@ app.get('/', async (req, res) => {
       insertTemperatureValues(datetime: $datetime, temperature: $temperature, insidetemperature: $insidetemperature, dewpoint: $dewpoint, feelslike: $feelslike)
       insertAirValues(datetime: $datetime, humidity: $humidity, insidehumidity: $insidehumidity, pressure: $pressure, windspeed: $windspeed, winddirection: $winddirection)
       insertRainValues(datetime: $datetime, rate: $rate)
+      insertSunValues(datetime: $datetime, radiation: $radiation, uvindex: $uvindex)
     }
   `;
 
@@ -55,6 +58,8 @@ app.get('/', async (req, res) => {
         windspeed: parseInt(windspeed.replace(',', '.'), 10),
         winddirection: parseInt(winddirection.replace(',', '.'), 10),
         rate: parseInt(rate.replace(',', '.'), 10),
+        radiation: parseInt(radiation.replace(',', '.'), 10),
+        uvindex: parseInt(uvindex.replace(',', '.'), 10),
       },
     });
   } catch (err) {
